@@ -1,0 +1,41 @@
+kind: pipeline
+
+name: MIKASA CI
+
+platform:
+
+  os: linux
+
+  arch: amd64
+
+clone:
+
+  depth: 1
+
+steps:
+
+  - name: build
+
+    image: ubuntu:latest
+
+    environment:
+
+      GIT_SECRET:
+
+        from_secret: GIT_SECRET
+
+    commands:
+
+      - apt update && apt install -y curl liblz4-1 libyaml-0-2 p7zip-full gcc g++ bison bc make git zip flex zipalign libssl-dev python python3 gcc-aarch64-linux-gnu cpio gcc-arm-linux-gnueabi
+
+      - git clone https://github.com/zzh-zzh-zzh/build-scripts.git /drone/build-tools/build-scripts --branch apollo --depth 1
+      
+      - git clone https://github.com/zzh-zzh-zzh/kernel_sm8250.git /drone/build-tools/kernel_sm8250 --depth=1 -b rebase
+
+      - git clone https://github.com/kdrag0n/proton-clang /drone/build-tools/proton-clang --depth 1
+
+      - git clone https://github.com/zzh-zzh-zzh/AnyKernel3.git /drone/build-tools/anykernel --branch apollo --depth 1
+      
+      - cd /drone/build-tools/kernel_sm8250
+
+      - bash /drone/build-tools/build-scripts/build.sh
