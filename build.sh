@@ -2,7 +2,7 @@
 
 # MIKASA CI | Powered by Drone | 2021 -
 
-curl -X POST "https://api.telegram.org/bot1954371310:AAGP9vHjbOh-14RjLxkcx5wQ_JtO46fL7RU/sendMessage" -d "chat_id=1169357932&text=Start compiling 
+curl -X POST "https://api.telegram.org/bot1954371310:AAGP9vHjbOh-14RjLxkcx5wQ_JtO46fL7RU/sendMessage" -d "chat_id=-574138196&text=Start compiling 
 $(date)"
 
 
@@ -34,10 +34,10 @@ make CC=clang LLVM=1 LLVM_IAS=1 -j${KJOBS}
 
 if  [ $? -eq 0 ]
 then 
-    curl -X POST "https://api.telegram.org/bot1954371310:AAGP9vHjbOh-14RjLxkcx5wQ_JtO46fL7RU/sendMessage" -d "chat_id=1169357932&text=Compiled successfully! 
+    curl -X POST "https://api.telegram.org/bot1954371310:AAGP9vHjbOh-14RjLxkcx5wQ_JtO46fL7RU/sendMessage" -d "chat_id=-574138196&text=Compiled successfully! 
 $(date)"
 else
-    curl -X POST "https://api.telegram.org/bot1954371310:AAGP9vHjbOh-14RjLxkcx5wQ_JtO46fL7RU/sendMessage" -d "chat_id=1169357932&text=Failed to compile !
+    curl -X POST "https://api.telegram.org/bot1954371310:AAGP9vHjbOh-14RjLxkcx5wQ_JtO46fL7RU/sendMessage" -d "chat_id=-574138196&text=Failed to compile !
 $(date)"
     exit 1
 fi
@@ -62,5 +62,5 @@ echo
 echo "Uploading"
 echo
 
-curl -v -F "chat_id=1169357932" -F document=@${VERSION}.zip https://api.telegram.org/bot1954371310:AAGP9vHjbOh-14RjLxkcx5wQ_JtO46fL7RU/sendDocument
+curl -v -F "chat_id=-574138196" -F document=@${VERSION}.zip https://api.telegram.org/bot1954371310:AAGP9vHjbOh-14RjLxkcx5wQ_JtO46fL7RU/sendDocument
 
